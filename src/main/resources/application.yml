@@ -1,0 +1,29 @@
+#server.contextPath: /auth
+spring:
+#  application:
+#    name: jdbc
+  datasource:
+    url: jdbc:mysql://localhost:3306/radarcns
+    username: springuser
+    password: Hyvers@123
+#    serverTimeZone:
+#    schema: oauth2
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+#    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    org.springframework.security: DEBUG
+#server:
+#  port: 8080
+keystore:
+  password: mySecretKey
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+      jwt:
+        keyUri: http://localhost:8080/oauth/token_key

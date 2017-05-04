@@ -1,8 +1,19 @@
-plugins {
-    id 'java'
-    id 'idea'
-    id 'org.springframework.boot' version '1.5.3.RELEASE'
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+    }
 }
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
 
 group 'org.radarcns.security'
@@ -13,6 +24,11 @@ targetCompatibility = 1.8
 
 ext.injectVersion = '1'
 ext.mySqlVersion = '5.0.8'
+ext.wro4jVersion ='1.8.0'
+ext.angularJsVersion = '1.6.2'
+ext.uiGridVersion = '3.2.5'
+ext.angularUiBootstrapVersion = '0.13.4'
+
 
 repositories {
     mavenCentral()
@@ -27,7 +43,13 @@ dependencies {
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
     compile group: 'mysql' , name: 'mysql-connector-java'
     compile group: 'javax.inject', name: 'javax.inject' , version: injectVersion
-    // for production env
+    compile group: 'ro.isdc.wro4j' , name: 'wro4j-extensions' , version : wro4jVersion
+
+    compile group: 'org.webjars', name: 'angularjs' , version: angularJsVersion
+    compile group: 'org.webjars', name: 'ui-grid' , version: uiGridVersion
+    compile group: 'org.webjars', name: 'angular-ui-bootstrap' , version: angularUiBootstrapVersion
+
+    //  production env
 //    compile("org.springframework.boot:spring-boot-starter-actuator")
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 

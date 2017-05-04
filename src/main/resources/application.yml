@@ -22,8 +22,10 @@ keystore:
   password: mySecretKey
 
 security:
-  oauth2:
-    resource:
-      filter-order: 3
-      jwt:
-        keyUri: http://localhost:8080/oauth/token_key
+#  oauth2:
+#    resource:
+#      filter-order: 3
+#      jwt:
+#        keyUri: http://localhost:8080/oauth/token_key
+  user:
+    password: password

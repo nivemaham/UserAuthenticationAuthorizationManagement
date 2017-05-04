@@ -1,6 +1,7 @@
 # Intellij
 .idea/
 *.iml
+.idea/libraries/
 *.iws
 
 # Mac
@@ -15,4 +16,7 @@ log/
 
 # Build
 build/
+
+conf.d/
+
 

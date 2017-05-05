@@ -11,9 +11,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableResourceServer // [2]
+//@EnableResourceServer // [2]
 public class ResourceServer extends ResourceServerConfigurerAdapter {
 
 //  @Inject
@@ -30,7 +31,22 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
 //        .authorizeRequests()
 //        .anyRequest().access("#oauth2.hasScope('resource-server-read')")
 //        .antMatchers("/write").hasAuthority("ROLE_RS_READ");
-    http.authorizeRequests().anyRequest().authenticated();
+    http.
+        authorizeRequests()
+        .antMatchers("/").permitAll()
+        .antMatchers("/login").permitAll()
+        .antMatchers("/registration").permitAll()
+        .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+        .authenticated().and().csrf().disable().formLogin()
+        .loginPage("/login").failureUrl("/login?error=true")
+        .defaultSuccessUrl("/admin/home")
+        .usernameParameter("email")
+        .passwordParameter("password")
+        .and().logout()
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/").and().exceptionHandling()
+        .accessDeniedPage("/access-denied");
+//    http.authorizeRequests().anyRequest().authenticated();
         ; //[4]
     // @formatter:on
   }

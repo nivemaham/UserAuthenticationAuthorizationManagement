@@ -2,7 +2,6 @@
 .idea/
 *.iml
 .idea/libraries/
-.idea/libraries/*
 *.iws
 
 # Mac

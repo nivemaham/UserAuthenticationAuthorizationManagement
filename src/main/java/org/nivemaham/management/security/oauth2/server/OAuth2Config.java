@@ -38,7 +38,8 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
   @Autowired
   private MyUserDetailsService userDetailsService;
 
-  private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
 
 
   @Autowired
